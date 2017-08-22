@@ -7,16 +7,17 @@ final class Validator
     /**
      * Validates the given array of data
      *
+     * @param string $table
      * @param array $data
      * @return Result
      */
-    public function validate(array $data)
+    public function validate($table, array $data)
     {
         $expectedColumns = array_keys(reset($data));
 
         $badColumns = array_reduce(
             array_keys($data),
-            $this->validateColumns($expectedColumns, $data),
+            $this->validateColumns($expectedColumns, $table, $data),
             []
         );
 
@@ -27,9 +28,9 @@ final class Validator
         return Result::valid();
     }
 
-    private function validateColumns(array $expectedColumns, array $data)
+    private function validateColumns(array $expectedColumns, $table, array $data)
     {
-        return function (array $badColumns, $index) use ($expectedColumns, $data) {
+        return function (array $badColumns, $index) use ($expectedColumns, $table, $data) {
             $columns = array_keys($data[$index]);
 
             // use array_diff with array_keys instead of array_diff_key because
@@ -38,7 +39,8 @@ final class Validator
 
             if (!empty($rowExtraColumns)) {
                 $badColumns[] = sprintf(
-                    'Fixture at index %d has extra columns: "%s"',
+                    '"%s" — Fixture at index %d has extra columns: "%s"',
+                    $table,
                     $index,
                     implode('", "', $rowExtraColumns)
                 );
@@ -48,7 +50,8 @@ final class Validator
 
             if (!empty($rowMissingColumns)) {
                 $badColumns[] = sprintf(
-                    'Fixture at index %d is missing columns: "%s"',
+                    '"%s" — Fixture at index %d is missing columns: "%s"',
+                    $table,
                     $index,
                     implode('", "', $rowMissingColumns)
                 );

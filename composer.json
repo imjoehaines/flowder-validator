@@ -18,6 +18,7 @@
             "role": "Developer"
         }
     ],
+    "bin": ["bin/flowder-validator"],
     "scripts": {
         "test": "phpunit tests/"
     },
@@ -38,5 +39,9 @@
         "psr-4": {
             "Imjoehaines\\Flowder\\Validator\\Test\\": "tests/"
         }
+    },
+    "require": {
+        "symfony/console": "^3.3",
+        "imjoehaines/flowder": "^1.0"
     }
 }

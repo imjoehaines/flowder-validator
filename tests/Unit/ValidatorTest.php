@@ -25,7 +25,7 @@ class ValidatorTest extends TestCase
 
         $expected = Result::valid();
 
-        $actual = $validator->validate($data);
+        $actual = $validator->validate('table', $data);
 
         $this->assertEquals($expected, $actual);
     }
@@ -48,7 +48,7 @@ class ValidatorTest extends TestCase
 
         $expected = Result::invalid(['Fixture at index 1 has extra columns: "c"']);
 
-        $actual = $validator->validate($data);
+        $actual = $validator->validate('table', $data);
 
         $this->assertEquals($expected, $actual);
     }
@@ -72,7 +72,7 @@ class ValidatorTest extends TestCase
 
         $expected = Result::invalid(['Fixture at index 1 has extra columns: "c", "d"']);
 
-        $actual = $validator->validate($data);
+        $actual = $validator->validate('table', $data);
 
         $this->assertEquals($expected, $actual);
     }
@@ -93,7 +93,7 @@ class ValidatorTest extends TestCase
 
         $expected = Result::invalid(['Fixture at index 1 is missing columns: "b"']);
 
-        $actual = $validator->validate($data);
+        $actual = $validator->validate('table', $data);
 
         $this->assertEquals($expected, $actual);
     }
@@ -115,7 +115,7 @@ class ValidatorTest extends TestCase
 
         $expected = Result::invalid(['Fixture at index 1 is missing columns: "b", "c"']);
 
-        $actual = $validator->validate($data);
+        $actual = $validator->validate('table', $data);
 
         $this->assertEquals($expected, $actual);
     }
@@ -143,11 +143,11 @@ class ValidatorTest extends TestCase
         ];
 
         $expected = Result::invalid([
-            'Fixture at index 1 has extra columns: "d", "e"',
-            'Fixture at index 2 is missing columns: "b", "c"'
+            '"table" — Fixture at index 1 has extra columns: "d", "e"',
+            '"table" — Fixture at index 2 is missing columns: "b", "c"'
         ]);
 
-        $actual = $validator->validate($data);
+        $actual = $validator->validate('table', $data);
 
         $this->assertEquals($expected, $actual);
     }
