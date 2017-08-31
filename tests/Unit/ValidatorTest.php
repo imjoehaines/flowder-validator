@@ -46,7 +46,7 @@ class ValidatorTest extends TestCase
             ],
         ];
 
-        $expected = Result::invalid(['Fixture at index 1 has extra columns: "c"']);
+        $expected = Result::invalid(['"table" — Fixture at index 1 has extra columns: "c"']);
 
         $actual = $validator->validate('table', $data);
 
@@ -70,7 +70,7 @@ class ValidatorTest extends TestCase
             ],
         ];
 
-        $expected = Result::invalid(['Fixture at index 1 has extra columns: "c", "d"']);
+        $expected = Result::invalid(['"table" — Fixture at index 1 has extra columns: "c", "d"']);
 
         $actual = $validator->validate('table', $data);
 
@@ -91,7 +91,7 @@ class ValidatorTest extends TestCase
             ],
         ];
 
-        $expected = Result::invalid(['Fixture at index 1 is missing columns: "b"']);
+        $expected = Result::invalid(['"table" — Fixture at index 1 is missing columns: "b"']);
 
         $actual = $validator->validate('table', $data);
 
@@ -113,7 +113,7 @@ class ValidatorTest extends TestCase
             ],
         ];
 
-        $expected = Result::invalid(['Fixture at index 1 is missing columns: "b", "c"']);
+        $expected = Result::invalid(['"table" — Fixture at index 1 is missing columns: "b", "c"']);
 
         $actual = $validator->validate('table', $data);
 
