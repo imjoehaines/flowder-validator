@@ -30,6 +30,22 @@ class ValidatorTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    public function testItReturnsValidResultForEmptyData()
+    {
+        $validator = new Validator();
+
+        $data = [
+            [],
+            [],
+        ];
+
+        $expected = Result::valid();
+
+        $actual = $validator->validate('table', $data);
+
+        $this->assertEquals($expected, $actual);
+    }
+
     public function testItReturnsInvalidResultForDataWithAnExtraColumn()
     {
         $validator = new Validator();

@@ -13,6 +13,10 @@ final class Validator
      */
     public function validate($table, array $data)
     {
+        if (empty($data)) {
+            return Result::valid();
+        }
+
         $expectedColumns = array_keys(reset($data));
 
         $badColumns = array_reduce(
